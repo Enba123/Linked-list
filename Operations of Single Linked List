@@ -1,0 +1,106 @@
+import java.util.*;
+public class SLL {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        Singlelink_list list=new Singlelink_list();
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            list.insert(sc.nextInt());
+        }
+        list.display();
+        System.out.println();
+        list.insert_begin(5);
+        list.insert_end(40);
+        list.display();
+        System.out.println();
+        list.delete_at_end();
+        int pos=sc.nextInt();
+        list.delete_at_pos(pos);
+        list.display();
+        int k=sc.nextInt();
+        list.search(k);
+    }
+}
+
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data=data;
+        this.next=null;
+    }
+}
+class Singlelink_list{
+    private Node head,temp,prev;
+    public void insert(int data){
+        Node velamal=new Node(data);
+        if(head==null){
+            head=temp=velamal;
+        }
+        else{
+            temp.next=velamal;
+            temp=velamal;
+        }
+    }
+    public void display(){
+        temp=head;
+     while(temp.next!=null){
+            System.out.print(temp.data+"->");
+            temp=temp.next;
+        }
+        System.out.print(temp.data);
+    }
+    public void insert_begin(int data){
+        Node velamal=new Node(data);
+        if(head==null)
+        {
+            temp=head=velamal;
+        }
+        else{
+            velamal.next=head;
+            head=velamal;
+        }
+    }
+    public void insert_end(int data){
+        Node velamal=new Node(data);
+        if(head==null){
+            head=temp=velamal;
+        }
+        else{
+            temp.next=velamal;
+        }
+    }
+    public void delete_at_begin(){
+          if(head==null){
+               System.out.print("Empty");
+          }
+          else{
+               head=head.next;
+          }
+    }
+    public void delete_at_end(){
+        temp=head;
+        while(temp.next!=null){
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=null;
+    }
+    public void delete_at_pos(int pos){
+        temp=head;
+        if(pos==1){
+           delete_at_begin();
+        }
+        else{
+            int i=0;
+            while(i<pos){
+                prev=temp;
+                temp=temp.next;
+                i++;
+            }
+            temp=temp.next;
+            prev.next=temp;
+        }
+    }
+
+}
