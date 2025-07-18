@@ -1,0 +1,86 @@
+import java.util.*;
+public class SLL {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        Singlelink_list list=new Singlelink_list();
+        int n=sc.nextInt();
+        for(int i=0;i<n;i++){
+            list.insert(sc.nextInt());
+        }
+        list.display();
+        System.out.println();
+        list.sum();
+        int k=sc.nextInt();
+        list.search(k);
+        list.reverse();
+        list.display();
+    }
+}
+
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data=data;
+        this.next=null;
+    }
+}
+class Singlelink_list{
+    private Node head,temp,prev;
+    public void insert(int data){
+        Node velamal=new Node(data);
+        if(head==null){
+            head=temp=velamal;
+        }
+        else{
+            temp.next=velamal;
+            temp=velamal;
+        }
+    }
+    public void display(){
+        temp=head;
+     while(temp.next!=null){
+            System.out.print(temp.data+"->");
+            temp=temp.next;
+        }
+        System.out.print(temp.data);
+    }
+    public void sum(){
+        int sum=0;
+        temp=head;
+        while(temp.next!=null){
+            sum=sum+temp.data;
+            temp=temp.next;
+        }
+        sum=sum+temp.data;
+        System.out.print(sum);
+    }
+    public void search(int k){
+        temp=head;
+        if(k==temp.data){
+            System.out.print("true");
+            return;
+        }
+        else{
+        while(temp.next!=null){
+            if(k==temp.data){
+               System.out.print("true");
+               return;
+            }
+            temp=temp.next;
+        }
+        System.out.print("false");
+     }
+   }
+   public void reverse(){
+        temp=head;
+        Node dot=null;
+        while(temp!=null){
+            prev=temp.next;
+            temp.next=dot;
+            dot=temp;
+            temp=prev;
+        } 
+        head=dot; 
+    }
+}
